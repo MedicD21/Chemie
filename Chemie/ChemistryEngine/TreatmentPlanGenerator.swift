@@ -2,7 +2,9 @@ import Foundation
 import SwiftData
 
 /// A single ingested test value paired with the metric definition it belongs to.
-struct MetricValueInput: Sendable {
+/// Not `Sendable` — `ChemicalTestMetric` is a SwiftData model tied to a context, and
+/// this type is only ever constructed and consumed synchronously on the main actor.
+struct MetricValueInput {
     let metric: ChemicalTestMetric
     let value: Double
 }

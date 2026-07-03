@@ -22,7 +22,9 @@ final class NotificationManager {
             return true
         case .notDetermined:
             do {
-                return try await center.requestAuthorization(options: [.alert, .sound, .badge, .timeSensitive])
+                // Time-sensitive delivery is gated by the entitlement + `interruptionLevel`
+                // on the notification content, not by an authorization option.
+                return try await center.requestAuthorization(options: [.alert, .sound, .badge])
             } catch {
                 return false
             }
