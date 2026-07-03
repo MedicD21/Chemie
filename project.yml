@@ -31,6 +31,9 @@ targets:
     platform: iOS
     sources:
       - path: Chemie
+    dependencies:
+      - sdk: WeatherKit.framework
+      - sdk: CoreLocation.framework
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.dushin.Chemie

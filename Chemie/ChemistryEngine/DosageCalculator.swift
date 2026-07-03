@@ -28,12 +28,13 @@ enum DosageCalculator {
         targetValue: Double,
         poolGallons: Double,
         inventory: [ChemicalProduct],
-        allUnits: [MeasurementUnit]
+        allUnits: [MeasurementUnit],
+        deltaMultiplier: Double = 1.0
     ) -> [DosageRecommendation] {
         let guidelines = ChemistryConstants.guidelineOptions(for: metric, direction: direction)
         guard !guidelines.isEmpty else { return [] }
 
-        let delta: Double
+        var delta: Double
         if metric == .combinedChlorine {
             // Breakpoint chlorination targets ~10x the combined chlorine reading as an FC boost.
             delta = currentValue * 10
@@ -41,6 +42,7 @@ enum DosageCalculator {
             delta = abs(targetValue - currentValue)
         }
         guard delta > 0 else { return [] }
+        delta *= deltaMultiplier
 
         let fallbackUnits = genericFallbackUnits(from: allUnits)
 

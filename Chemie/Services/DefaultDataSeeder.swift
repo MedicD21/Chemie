@@ -9,6 +9,7 @@ enum DefaultDataSeeder {
     static func seedIfNeeded(context: ModelContext) {
         seedMeasurementUnits(context: context)
         seedPoolIfNeeded(context: context)
+        seedMaintenanceTasksIfNeeded(context: context)
         try? context.save()
     }
 
@@ -37,6 +38,16 @@ enum DefaultDataSeeder {
 
         for unit in MeasurementUnit.makeDefaults() {
             context.insert(unit)
+        }
+    }
+
+    static func seedMaintenanceTasksIfNeeded(context: ModelContext) {
+        let descriptor = FetchDescriptor<MaintenanceTask>()
+        let existing = (try? context.fetch(descriptor)) ?? []
+        guard existing.isEmpty else { return }
+
+        for task in MaintenanceTask.makeDefaults() {
+            context.insert(task)
         }
     }
 }

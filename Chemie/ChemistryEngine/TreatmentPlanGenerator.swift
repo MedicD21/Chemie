@@ -23,10 +23,12 @@ struct GeneratedStep: Sendable, Identifiable {
     var matchedProductName: String?
     var warnings: [String]
     var waitMinutesAfter: Int
+    var isWeatherAdjusted: Bool = false
 }
 
 struct GeneratedPlan: Sendable {
     var summary: String
+    var weatherNote: String?
     var steps: [GeneratedStep]
 }
 
@@ -38,7 +40,8 @@ enum TreatmentPlanGenerator {
         inputs: [MetricValueInput],
         poolGallons: Double,
         inventory: [ChemicalProduct],
-        allUnits: [MeasurementUnit]
+        allUnits: [MeasurementUnit],
+        weather: WeatherContext? = nil
     ) -> GeneratedPlan {
         var draftSteps: [(rank: Int, insertionIndex: Int, step: GeneratedStep)] = []
         var addressedMetricNames: [String] = []
@@ -58,7 +61,8 @@ enum TreatmentPlanGenerator {
                     status: status,
                     poolGallons: poolGallons,
                     inventory: inventory,
-                    allUnits: allUnits
+                    allUnits: allUnits,
+                    weather: weather
                 ) else { continue }
                 draftSteps.append((rank: step.chemicalKind.defaultTimingRank, insertionIndex: index, step: step))
                 addressedMetricNames.append(metric.displayName)
@@ -109,7 +113,7 @@ enum TreatmentPlanGenerator {
             summary = "Balance your pool in the order listed below. Wait the noted time between each step and retest before swimming. This plan addresses: \(names)."
         }
 
-        return GeneratedPlan(summary: summary, steps: steps)
+        return GeneratedPlan(summary: summary, weatherNote: weather?.advisoryNote, steps: steps)
     }
 
     private static func calculatedStep(
@@ -119,7 +123,8 @@ enum TreatmentPlanGenerator {
         status: MetricStatus,
         poolGallons: Double,
         inventory: [ChemicalProduct],
-        allUnits: [MeasurementUnit]
+        allUnits: [MeasurementUnit],
+        weather: WeatherContext?
     ) -> GeneratedStep? {
         let direction: DosageDirection
         if key == .combinedChlorine {
@@ -128,6 +133,11 @@ enum TreatmentPlanGenerator {
             direction = status == .low ? .increase : .decrease
         }
 
+        // Heat and strong UV accelerate chlorine photodegradation, so boost sanitizer
+        // dosages accordingly. Only relevant when we're actually adding chlorine.
+        let isSanitizerIncrease = direction == .increase && (key == .freeChlorine || key == .combinedChlorine)
+        let weatherMultiplier = isSanitizerIncrease ? (weather?.chlorineDemandMultiplier ?? 1.0) : 1.0
+
         let recommendations = DosageCalculator.recommendations(
             for: key,
             direction: direction,
@@ -135,7 +145,8 @@ enum TreatmentPlanGenerator {
             targetValue: metric.targetValue,
             poolGallons: poolGallons,
             inventory: inventory,
-            allUnits: allUnits
+            allUnits: allUnits,
+            deltaMultiplier: weatherMultiplier
         )
 
         guard let primary = recommendations.first else {
@@ -162,6 +173,8 @@ enum TreatmentPlanGenerator {
             instructions += "\n\nNot currently in your inventory — add it under Inventory to track stock, or pick up \(primary.chemicalKind.displayName) before starting."
         }
 
+        let isWeatherAdjusted = weatherMultiplier > 1.0
+
         return GeneratedStep(
             order: 0,
             title: title,
@@ -174,7 +187,8 @@ enum TreatmentPlanGenerator {
             matchedProductID: primary.matchedProductID,
             matchedProductName: primary.matchedProductName,
             warnings: [],
-            waitMinutesAfter: primary.chemicalKind.defaultWaitMinutesAfter
+            waitMinutesAfter: primary.chemicalKind.defaultWaitMinutesAfter,
+            isWeatherAdjusted: isWeatherAdjusted
         )
     }
 
@@ -243,7 +257,7 @@ extension TreatmentPlanGenerator {
         testReading: TestReading,
         context: ModelContext
     ) -> TreatmentPlan {
-        let planModel = TreatmentPlan(summary: plan.summary)
+        let planModel = TreatmentPlan(summary: plan.summary, weatherSummary: plan.weatherNote ?? "")
         planModel.pool = pool
         planModel.testReading = testReading
         context.insert(planModel)
@@ -262,7 +276,8 @@ extension TreatmentPlanGenerator {
                 matchedProductID: generated.matchedProductID,
                 matchedProductName: generated.matchedProductName,
                 warnings: generated.warnings,
-                waitMinutesAfter: generated.waitMinutesAfter
+                waitMinutesAfter: generated.waitMinutesAfter,
+                isWeatherAdjusted: generated.isWeatherAdjusted
             )
             step.treatmentPlan = planModel
             context.insert(step)

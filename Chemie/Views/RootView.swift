@@ -5,9 +5,10 @@ struct RootView: View {
     @Environment(\.modelContext) private var context
     @Query private var pools: [Pool]
     @State private var selectedTab: Tab = .dashboard
+    @State private var weatherStore = WeatherStore()
 
     enum Tab {
-        case dashboard, test, inventory, history, settings
+        case dashboard, test, inventory, maintenance, history, settings
     }
 
     var body: some View {
@@ -24,6 +25,10 @@ struct RootView: View {
                 .tabItem { Label("Inventory", systemImage: "shippingbox.fill") }
                 .tag(Tab.inventory)
 
+            MaintenanceListView()
+                .tabItem { Label("Maintenance", systemImage: "wrench.and.screwdriver.fill") }
+                .tag(Tab.maintenance)
+
             HistoryView()
                 .tabItem { Label("History", systemImage: "clock.arrow.circlepath") }
                 .tag(Tab.history)
@@ -33,7 +38,13 @@ struct RootView: View {
                 .tag(Tab.settings)
         }
         .tint(Theme.accentAqua)
+        .environment(weatherStore)
         .onAppear(perform: configureAppearance)
+        .task(id: pools.first?.id) {
+            if let pool = pools.first, pool.hasLocation {
+                await weatherStore.refresh(pool: pool)
+            }
+        }
     }
 
     private func configureAppearance() {

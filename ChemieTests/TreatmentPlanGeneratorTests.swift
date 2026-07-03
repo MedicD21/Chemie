@@ -105,6 +105,78 @@ final class TreatmentPlanGeneratorTests: XCTestCase {
         XCTAssertTrue(plan.steps.first?.instructions.contains("draining") ?? false)
     }
 
+    private func weather(
+        temp: Double = 75,
+        uv: Int = 4,
+        chance: Double = 0.1,
+        amountInches: Double = 0
+    ) -> WeatherContext {
+        WeatherContext(
+            temperatureF: temp,
+            uvIndex: uv,
+            precipitationChance: chance,
+            precipitationAmountInches: amountInches,
+            conditionDescription: "clear",
+            fetchedAt: .distantPast
+        )
+    }
+
+    func testHotWeatherBoostsChlorineStepAndFlagsItAdjusted() {
+        let fc = metric(.freeChlorine, min: 2, max: 4)
+        let hotWeather = weather(temp: 95)
+
+        let mildPlan = TreatmentPlanGenerator.generate(
+            inputs: [MetricValueInput(metric: fc, value: 0.5)],
+            poolGallons: 10_000, inventory: [], allUnits: []
+        )
+        let hotPlan = TreatmentPlanGenerator.generate(
+            inputs: [MetricValueInput(metric: fc, value: 0.5)],
+            poolGallons: 10_000, inventory: [], allUnits: [], weather: hotWeather
+        )
+
+        let mildStep = mildPlan.steps.first { $0.chemicalKind == .liquidChlorine }!
+        let hotStep = hotPlan.steps.first { $0.chemicalKind == .liquidChlorine }!
+
+        XCTAssertFalse(mildStep.isWeatherAdjusted)
+        XCTAssertTrue(hotStep.isWeatherAdjusted)
+        XCTAssertGreaterThan(hotStep.amount, mildStep.amount)
+    }
+
+    func testWeatherDoesNotAffectNonChlorineSteps() {
+        let ph = metric(.pH, min: 7.4, max: 7.6)
+        let hotWeather = weather(temp: 95, uv: 9)
+
+        let plan = TreatmentPlanGenerator.generate(
+            inputs: [MetricValueInput(metric: ph, value: 8.0)],
+            poolGallons: 10_000, inventory: [], allUnits: [], weather: hotWeather
+        )
+
+        let phStep = plan.steps.first { $0.chemicalKind == .muriaticAcid }
+        XCTAssertFalse(phStep?.isWeatherAdjusted ?? true)
+    }
+
+    func testRainyForecastAddsPlanLevelAdvisory() {
+        let fc = metric(.freeChlorine, min: 2, max: 4)
+        let rainyWeather = weather(chance: 0.7)
+
+        let plan = TreatmentPlanGenerator.generate(
+            inputs: [MetricValueInput(metric: fc, value: 0.5)],
+            poolGallons: 10_000, inventory: [], allUnits: [], weather: rainyWeather
+        )
+
+        XCTAssertTrue(plan.weatherNote?.contains("Rain") ?? false)
+    }
+
+    func testNoWeatherMeansNoAdvisoryOrAdjustment() {
+        let fc = metric(.freeChlorine, min: 2, max: 4)
+        let plan = TreatmentPlanGenerator.generate(
+            inputs: [MetricValueInput(metric: fc, value: 0.5)],
+            poolGallons: 10_000, inventory: [], allUnits: []
+        )
+        XCTAssertNil(plan.weatherNote)
+        XCTAssertFalse(plan.steps.first?.isWeatherAdjusted ?? true)
+    }
+
     func testInventoryProductIsPreferredAndReflectedInStep() {
         let unit = MeasurementUnit(name: "Scoops", abbreviation: "scoop", ouncesPerUnit: 24, isCustom: true)
         let product = ChemicalProduct(name: "My Soda Ash", chemicalKind: .sodaAsh)

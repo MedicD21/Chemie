@@ -12,6 +12,8 @@ enum PersistenceController {
         ChemicalProduct.self,
         TreatmentPlan.self,
         TreatmentStep.self,
+        MaintenanceTask.self,
+        MaintenanceLogEntry.self,
     ])
 
     /// Creates the app's model container backed by CloudKit for cross-device sync,

@@ -23,6 +23,23 @@ struct TreatmentPlanView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .cardStyle(elevated: true)
 
+                if !plan.weatherSummary.isEmpty {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Label("Weather Advisory", systemImage: "cloud.sun.fill")
+                            .font(Theme.Font.headline())
+                            .foregroundStyle(Theme.textPrimary)
+                        Text(plan.weatherSummary)
+                            .font(Theme.Font.body())
+                            .foregroundStyle(Theme.textSecondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .cardStyle()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Theme.Metrics.cornerRadius, style: .continuous)
+                            .stroke(Theme.accentSand.opacity(0.5), lineWidth: 1)
+                    )
+                }
+
                 if plan.orderedSteps.isEmpty {
                     EmptyStateView(
                         systemImage: "checkmark.seal.fill",

@@ -3,6 +3,7 @@ import SwiftData
 
 struct TestEntryView: View {
     @Environment(\.modelContext) private var context
+    @Environment(WeatherStore.self) private var weatherStore
     @Query private var pools: [Pool]
     @Query private var allProducts: [ChemicalProduct]
     @Query private var allUnits: [MeasurementUnit]
@@ -24,6 +25,12 @@ struct TestEntryView: View {
                                 .font(Theme.Font.caption())
                                 .foregroundStyle(Theme.textSecondary)
                                 .listRowBackground(Theme.background)
+                            if let weather = weatherStore.context {
+                                WeatherChip(context: weather)
+                                    .listRowInsets(EdgeInsets())
+                                    .listRowBackground(Color.clear)
+                                    .padding(.vertical, 2)
+                            }
                         }
 
                         Section("Readings") {
@@ -93,6 +100,12 @@ struct TestEntryView: View {
 
         let reading = TestReading()
         reading.pool = pool
+        if let weather = weatherStore.context {
+            reading.temperatureF = weather.temperatureF
+            reading.uvIndex = weather.uvIndex
+            reading.precipitationChance = weather.precipitationChance
+            reading.weatherConditionDescription = weather.conditionDescription
+        }
         context.insert(reading)
 
         for input in inputs {
@@ -111,7 +124,8 @@ struct TestEntryView: View {
             inputs: inputs,
             poolGallons: pool.volumeGallons,
             inventory: allProducts,
-            allUnits: allUnits
+            allUnits: allUnits,
+            weather: weatherStore.context
         )
 
         let planModel = TreatmentPlanGenerator.makeModel(

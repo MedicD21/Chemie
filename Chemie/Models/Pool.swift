@@ -11,6 +11,11 @@ final class Pool {
     var createdDate: Date = Date.now
     var notes: String = ""
 
+    /// Pool location, used to look up local weather (heat/UV/rain) for treatment
+    /// planning. Both are set together via "Use Current Location"; nil until then.
+    var latitude: Double?
+    var longitude: Double?
+
     @Relationship(deleteRule: .cascade, inverse: \ChemicalTestMetric.pool)
     var metrics: [ChemicalTestMetric]? = []
 
@@ -56,5 +61,9 @@ final class Pool {
 
     var mostRecentReading: TestReading? {
         (testReadings ?? []).sorted { $0.date > $1.date }.first
+    }
+
+    var hasLocation: Bool {
+        latitude != nil && longitude != nil
     }
 }

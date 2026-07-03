@@ -20,6 +20,8 @@ final class TreatmentStep {
     var completedAt: Date?
     var scheduledAlertDate: Date?
     var scheduledNotificationID: String?
+    /// True when this step's amount was boosted for today's heat/UV forecast.
+    var isWeatherAdjusted: Bool = false
 
     var treatmentPlan: TreatmentPlan?
 
@@ -36,7 +38,8 @@ final class TreatmentStep {
         matchedProductID: UUID? = nil,
         matchedProductName: String? = nil,
         warnings: [String] = [],
-        waitMinutesAfter: Int
+        waitMinutesAfter: Int,
+        isWeatherAdjusted: Bool = false
     ) {
         self.id = id
         self.order = order
@@ -51,6 +54,7 @@ final class TreatmentStep {
         self.matchedProductName = matchedProductName
         self.warnings = warnings
         self.waitMinutesAfter = waitMinutesAfter
+        self.isWeatherAdjusted = isWeatherAdjusted
     }
 
     var chemicalKind: ChemicalKind {

@@ -5,6 +5,7 @@ struct DashboardView: View {
     @Binding var selectedTab: RootView.Tab
 
     @Environment(\.modelContext) private var context
+    @Environment(WeatherStore.self) private var weatherStore
     @Query private var pools: [Pool]
     @Query(sort: \ChemicalProduct.name) private var products: [ChemicalProduct]
     @Query(filter: #Predicate<TreatmentPlan> { $0.statusRaw == "In Progress" }, sort: \TreatmentPlan.createdDate, order: .reverse)
@@ -22,6 +23,15 @@ struct DashboardView: View {
                 VStack(spacing: Theme.Metrics.sectionSpacing) {
                     if let pool {
                         PoolHeaderCard(pool: pool)
+
+                        if let weather = weatherStore.context {
+                            WeatherChip(context: weather)
+                            if weather.isHeavyRainEvent {
+                                PostRainChecklistCard(context: weather) {
+                                    selectedTab = .maintenance
+                                }
+                            }
+                        }
 
                         if let plan = activePlans.first {
                             ActivePlanCard(plan: plan) {

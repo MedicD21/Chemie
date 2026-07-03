@@ -12,6 +12,9 @@ A pool chemical tracker, dosage calculator, and inventory manager for iOS, built
 - **Reminders** — local notifications fire when a treatment step's wait time is up, when inventory runs low, and (optionally) on a recurring schedule to remind you to test.
 - **History & trends** — every test and treatment plan is saved, with a Swift Charts trend view per metric over time.
 - **iCloud sync** — data is stored in SwiftData backed by CloudKit, so your pool, inventory, and history sync across your devices. If CloudKit isn't available (no iCloud account, no team configured), the app automatically falls back to local-only storage.
+- **Weather-aware dosing** — set your pool's location once and Chemie pulls local weather (WeatherKit) to boost sanitizer recommendations for hot/high-UV days (chlorine burns off faster), flag rain in the forecast so you know to retest, and detect heavy rain events.
+- **Maintenance & cleaning schedule** — beyond chemistry, recurring non-chemical tasks (skimming, brushing, basket/filter cleaning, water level, equipment checks, tile cleaning) live on their own Maintenance tab with due-date tracking and reminders. After a recorded/forecast heavy rain event, a dedicated post-rain checklist and notification prompt a cleaning pass.
+- **Time-sensitive alerts** — treatment step reminders use the `.timeSensitive` interruption level so they can break through Focus/Do Not Disturb when timing between chemicals matters.
 
 ## Project Structure
 
@@ -42,8 +45,11 @@ open Chemie.xcodeproj
 ```
 
 Then in Xcode:
-1. Select the **Chemie** target → **Signing & Capabilities** and choose your development team (needed for the iCloud/CloudKit entitlement).
+1. Select the **Chemie** target → **Signing & Capabilities** and choose your development team (needed for the iCloud/CloudKit, WeatherKit, and time-sensitive-notifications entitlements — automatic signing should register these capabilities for you the first time you build).
 2. Build and run on a simulator or device (iOS 17+).
+3. Grant location and notification permissions when prompted so weather-adjusted dosing and reminders work; both are optional and the app degrades gracefully without them.
+
+Note: WeatherKit requires a paid Apple Developer Program membership. If you don't have one, the app still builds and runs fine — weather-based adjustments and the rain checklist simply won't have data to work with until a pool location resolves weather successfully.
 
 If you change `project.yml` or add/remove files, re-run `xcodegen generate` to refresh the Xcode project.
 

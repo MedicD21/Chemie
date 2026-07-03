@@ -36,10 +36,15 @@ struct TreatmentStepRow: View {
                         }
                     }
 
-                    if let productName = step.matchedProductName {
-                        TextBadge(text: "In stock: \(productName)", color: Theme.success)
-                    } else if step.amount > 0 {
-                        TextBadge(text: "Not in your inventory", color: Theme.warning)
+                    HStack(spacing: 6) {
+                        if let productName = step.matchedProductName {
+                            TextBadge(text: "In stock: \(productName)", color: Theme.success)
+                        } else if step.amount > 0 {
+                            TextBadge(text: "Not in your inventory", color: Theme.warning)
+                        }
+                        if step.isWeatherAdjusted {
+                            TextBadge(text: "Weather-adjusted", color: Theme.accentSand)
+                        }
                     }
 
                     Text(step.instructions)

@@ -22,7 +22,7 @@ final class NotificationManager {
             return true
         case .notDetermined:
             do {
-                return try await center.requestAuthorization(options: [.alert, .sound, .badge])
+                return try await center.requestAuthorization(options: [.alert, .sound, .badge, .timeSensitive])
             } catch {
                 return false
             }
@@ -43,7 +43,9 @@ final class NotificationManager {
     }
 
     /// Schedules a one-off local notification for a specific treatment step, returning
-    /// the identifier so it can be tracked and cancelled if the step is undone.
+    /// the identifier so it can be tracked and cancelled if the step is undone. Marked
+    /// time-sensitive so it breaks through Focus/Do Not Disturb — waiting too long
+    /// between chemical additions matters for a correctly balanced pool.
     @discardableResult
     func scheduleStepReminder(title: String, body: String, fireDate: Date) async -> String? {
         guard await requestAuthorizationIfNeeded(), fireDate > .now else { return nil }
@@ -52,6 +54,8 @@ final class NotificationManager {
         content.title = title
         content.body = body
         content.sound = .default
+        content.interruptionLevel = .timeSensitive
+        content.relevanceScore = 1.0
 
         let interval = max(fireDate.timeIntervalSinceNow, 1)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
@@ -77,6 +81,52 @@ final class NotificationManager {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
         let identifier = "low-stock-\(UUID().uuidString)"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+        do {
+            try await center.add(request)
+            return identifier
+        } catch {
+            return nil
+        }
+    }
+
+    /// Schedules a routine (non-time-sensitive) reminder for a recurring maintenance task.
+    @discardableResult
+    func scheduleMaintenanceReminder(taskTitle: String, taskDescription: String, fireDate: Date) async -> String? {
+        guard await requestAuthorizationIfNeeded(), fireDate > .now else { return nil }
+
+        let content = UNMutableNotificationContent()
+        content.title = "Pool Maintenance: \(taskTitle)"
+        content.body = taskDescription.isEmpty ? "It's time for this recurring maintenance task." : taskDescription
+        content.sound = .default
+
+        let interval = max(fireDate.timeIntervalSinceNow, 1)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        let identifier = "maintenance-\(UUID().uuidString)"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+        do {
+            try await center.add(request)
+            return identifier
+        } catch {
+            return nil
+        }
+    }
+
+    /// Alerts the user that a heavy rain event was recorded/forecast and it's worth
+    /// running the post-rain cleaning checklist.
+    @discardableResult
+    func scheduleRainChecklistAlert(context: WeatherContext) async -> String? {
+        guard await requestAuthorizationIfNeeded() else { return nil }
+
+        let content = UNMutableNotificationContent()
+        content.title = "Heavy Rain — Check Your Pool"
+        content.body = "\(context.postRainHeadline) Open Chemie's Maintenance tab for the full checklist."
+        content.sound = .default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let identifier = "rain-checklist-\(UUID().uuidString)"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
 
         do {

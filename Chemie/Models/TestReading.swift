@@ -7,6 +7,14 @@ final class TestReading {
     var date: Date = Date.now
     var notes: String = ""
 
+    /// Weather conditions at the time of the test, when location + WeatherKit were
+    /// available. Used to explain weather-adjusted dosages in the generated plan and
+    /// kept as a historical record even if conditions change afterward.
+    var temperatureF: Double?
+    var uvIndex: Int?
+    var precipitationChance: Double?
+    var weatherConditionDescription: String?
+
     var pool: Pool?
 
     @Relationship(deleteRule: .cascade, inverse: \MetricReading.testReading)
