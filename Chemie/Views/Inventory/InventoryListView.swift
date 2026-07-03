@@ -54,6 +54,7 @@ struct InventoryListView: View {
                 }
             }
             .navigationTitle("Inventory")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {

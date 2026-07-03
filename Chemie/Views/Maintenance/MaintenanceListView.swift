@@ -47,6 +47,7 @@ struct MaintenanceListView: View {
             .scrollContentBackground(.hidden)
             .screenBackground()
             .navigationTitle("Maintenance")
+            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showingAdd) {
                 MaintenanceTaskEditView(task: nil)
             }

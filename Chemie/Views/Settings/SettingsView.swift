@@ -74,6 +74,7 @@ struct SettingsView: View {
             .scrollContentBackground(.hidden)
             .screenBackground()
             .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .confirmationDialog(
                 "Reset All Data?",
                 isPresented: $showingResetConfirmation,

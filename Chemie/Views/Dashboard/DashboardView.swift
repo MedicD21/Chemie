@@ -73,6 +73,7 @@ struct DashboardView: View {
             }
             .screenBackground()
             .navigationTitle("Chemie")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: TreatmentPlan.self) { plan in
                 TreatmentPlanView(plan: plan)
             }

@@ -61,6 +61,7 @@ struct HistoryView: View {
                 }
             }
             .navigationTitle("History")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
@@ -104,19 +105,23 @@ private struct HistoryRow: View {
     let reading: TestReading
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(reading.date.formatted(date: .abbreviated, time: .shortened))
                 .font(Theme.Font.body())
                 .foregroundStyle(Theme.textPrimary)
-            HStack(spacing: 6) {
-                ForEach(reading.sortedReadings.prefix(5)) { metricReading in
-                    Text(shortLabel(metricReading))
-                        .font(Theme.Font.caption())
-                        .foregroundStyle(Theme.textSecondary)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Theme.surfaceElevated)
-                        .clipShape(Capsule())
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(reading.sortedReadings) { metricReading in
+                        Text(shortLabel(metricReading))
+                            .font(Theme.Font.caption())
+                            .foregroundStyle(Theme.textSecondary)
+                            .lineLimit(1)
+                            .fixedSize()
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Theme.surfaceElevated)
+                            .clipShape(Capsule())
+                    }
                 }
             }
         }

@@ -69,6 +69,7 @@ struct TestEntryView: View {
                 }
             }
             .navigationTitle("Test Water")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

@@ -39,28 +39,10 @@ struct RootView: View {
         }
         .tint(Theme.accentAqua)
         .environment(weatherStore)
-        .onAppear(perform: configureAppearance)
         .task(id: pools.first?.id) {
             if let pool = pools.first, pool.hasLocation {
                 await weatherStore.refresh(pool: pool)
             }
         }
-    }
-
-    private func configureAppearance() {
-        let tabAppearance = UITabBarAppearance()
-        tabAppearance.configureWithOpaqueBackground()
-        tabAppearance.backgroundColor = UIColor(Theme.backgroundSecondary)
-        UITabBar.appearance().standardAppearance = tabAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabAppearance
-
-        let navAppearance = UINavigationBarAppearance()
-        navAppearance.configureWithOpaqueBackground()
-        navAppearance.backgroundColor = UIColor(Theme.background)
-        navAppearance.titleTextAttributes = [.foregroundColor: UIColor(Theme.textPrimary)]
-        navAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Theme.textPrimary)]
-        UINavigationBar.appearance().standardAppearance = navAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
-        UINavigationBar.appearance().compactAppearance = navAppearance
     }
 }
