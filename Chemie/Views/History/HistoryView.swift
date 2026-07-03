@@ -4,6 +4,7 @@ import Charts
 
 struct HistoryView: View {
     @Query(sort: \TestReading.date, order: .reverse) private var readings: [TestReading]
+    @Query(sort: \TreatmentPlan.createdDate, order: .reverse) private var plans: [TreatmentPlan]
     @Query private var pools: [Pool]
     @Environment(\.modelContext) private var context
 
@@ -27,6 +28,19 @@ struct HistoryView: View {
                             Section("Trend") {
                                 TrendChartView(pool: pool, readings: readings, selectedMetricKey: $selectedMetricKey)
                                     .listRowBackground(Theme.surface)
+                            }
+                        }
+
+                        if !plans.isEmpty {
+                            Section("Treatment Plans") {
+                                ForEach(plans) { plan in
+                                    NavigationLink {
+                                        TreatmentPlanView(plan: plan)
+                                    } label: {
+                                        TreatmentPlanRow(plan: plan)
+                                    }
+                                }
+                                .listRowBackground(Theme.surface)
                             }
                         }
 
@@ -55,6 +69,34 @@ struct HistoryView: View {
             context.delete(readings[index])
         }
         try? context.save()
+    }
+}
+
+private struct TreatmentPlanRow: View {
+    let plan: TreatmentPlan
+
+    private var completedCount: Int {
+        plan.orderedSteps.filter(\.isCompleted).count
+    }
+
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(plan.createdDate.formatted(date: .abbreviated, time: .shortened))
+                    .font(Theme.Font.body())
+                    .foregroundStyle(Theme.textPrimary)
+                Text("\(completedCount) of \(plan.orderedSteps.count) steps complete")
+                    .font(Theme.Font.caption())
+                    .foregroundStyle(Theme.textSecondary)
+            }
+            Spacer()
+            TextBadge(
+                text: plan.status.rawValue,
+                color: plan.status == .completed ? Theme.success : Theme.accentAqua,
+                filled: plan.status == .inProgress
+            )
+        }
+        .padding(.vertical, 2)
     }
 }
 

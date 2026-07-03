@@ -16,6 +16,12 @@ final class MeasurementUnit {
     var isCustom: Bool = false
     var notes: String = ""
 
+    /// When no specific product is on hand to suggest a preferred unit, dosage
+    /// suggestions fall back to whichever unit is flagged as the default for that
+    /// chemical's form — e.g. "Scoops" for powders/granulars once the user sets it.
+    var isDefaultForPowders: Bool = false
+    var isDefaultForLiquids: Bool = false
+
     var stockedByProducts: [ChemicalProduct]? = []
     var preferredByProducts: [ChemicalProduct]? = []
 
@@ -25,7 +31,9 @@ final class MeasurementUnit {
         abbreviation: String,
         ouncesPerUnit: Double?,
         isCustom: Bool = false,
-        notes: String = ""
+        notes: String = "",
+        isDefaultForPowders: Bool = false,
+        isDefaultForLiquids: Bool = false
     ) {
         self.id = id
         self.name = name
@@ -33,6 +41,8 @@ final class MeasurementUnit {
         self.ouncesPerUnit = ouncesPerUnit
         self.isCustom = isCustom
         self.notes = notes
+        self.isDefaultForPowders = isDefaultForPowders
+        self.isDefaultForLiquids = isDefaultForLiquids
     }
 
     /// Converts an amount expressed in ounces into a quantity of this unit.
@@ -43,20 +53,23 @@ final class MeasurementUnit {
 
     static func makeDefaults() -> [MeasurementUnit] {
         [
-            MeasurementUnit(name: "Ounce", abbreviation: "oz", ouncesPerUnit: 1),
+            MeasurementUnit(name: "Ounce", abbreviation: "oz", ouncesPerUnit: 1, isDefaultForLiquids: true),
             MeasurementUnit(name: "Pound", abbreviation: "lb", ouncesPerUnit: 16),
             MeasurementUnit(name: "Gallon", abbreviation: "gal", ouncesPerUnit: 128),
             MeasurementUnit(name: "Quart", abbreviation: "qt", ouncesPerUnit: 32),
             MeasurementUnit(name: "Cup", abbreviation: "cup", ouncesPerUnit: 8),
             MeasurementUnit(name: "Tablet", abbreviation: "tab", ouncesPerUnit: nil),
             MeasurementUnit(name: "Puck", abbreviation: "puck", ouncesPerUnit: nil),
-            // The user's own setup: a 24oz measuring cup they call a "Scoop".
+            // The user's own setup: a 24oz measuring cup they call a "Scoop". Used as the
+            // default suggested unit for powder/granular chemicals (soda ash, baking soda,
+            // cal-hypo, etc.) whenever there's no specific product on hand to override it.
             MeasurementUnit(
                 name: "Scoops",
                 abbreviation: "scoop",
                 ouncesPerUnit: 24,
                 isCustom: true,
-                notes: "Sized to a 24oz measuring cup."
+                notes: "Sized to a 24oz measuring cup.",
+                isDefaultForPowders: true
             ),
         ]
     }

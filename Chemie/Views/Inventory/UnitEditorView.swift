@@ -38,8 +38,16 @@ struct UnitEditorView: View {
                                     }
                                 }
                                 Spacer()
-                                if unit.isCustom {
-                                    TextBadge(text: "Custom")
+                                VStack(alignment: .trailing, spacing: 4) {
+                                    if unit.isCustom {
+                                        TextBadge(text: "Custom")
+                                    }
+                                    if unit.isDefaultForPowders {
+                                        TextBadge(text: "Default: Powders", color: Theme.accentSand)
+                                    }
+                                    if unit.isDefaultForLiquids {
+                                        TextBadge(text: "Default: Liquids", color: Theme.accentPoolBlue)
+                                    }
                                 }
                             }
                         }
@@ -91,12 +99,15 @@ private struct UnitFormSheet: View {
 
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Query(sort: \MeasurementUnit.name) private var allUnits: [MeasurementUnit]
 
     @State private var name = ""
     @State private var abbreviation = ""
     @State private var isCountBased = false
     @State private var ouncesPerUnit = ""
     @State private var notes = ""
+    @State private var isDefaultForPowders = false
+    @State private var isDefaultForLiquids = false
 
     private var isEditing: Bool { unit != nil }
 
@@ -119,6 +130,12 @@ private struct UnitFormSheet: View {
                     }
                 } footer: {
                     Text("Example: a 24oz measuring cup used as a \"Scoop\" would have 24 ounces per unit.")
+                }
+                Section {
+                    Toggle("Default for Powders/Granulars", isOn: $isDefaultForPowders)
+                    Toggle("Default for Liquids", isOn: $isDefaultForLiquids)
+                } footer: {
+                    Text("Used to suggest amounts in this unit for chemicals you don't have a specific product entry for yet — e.g. suggesting Scoops of soda ash before you've added soda ash to your inventory.")
                 }
                 Section("Notes") {
                     TextField("Notes", text: $notes, axis: .vertical)
@@ -145,6 +162,8 @@ private struct UnitFormSheet: View {
         isCountBased = unit.ouncesPerUnit == nil
         ouncesPerUnit = unit.ouncesPerUnit.map { $0 == $0.rounded() ? String(Int($0)) : String(format: "%.2f", $0) } ?? ""
         notes = unit.notes
+        isDefaultForPowders = unit.isDefaultForPowders
+        isDefaultForLiquids = unit.isDefaultForLiquids
     }
 
     private func save() {
@@ -153,10 +172,21 @@ private struct UnitFormSheet: View {
         target.abbreviation = abbreviation
         target.ouncesPerUnit = isCountBased ? nil : Double(ouncesPerUnit)
         target.notes = notes
+        target.isDefaultForPowders = isDefaultForPowders
+        target.isDefaultForLiquids = isDefaultForLiquids
 
         if unit == nil {
             context.insert(target)
         }
+
+        // Only one unit can be the default for a given form at a time.
+        if isDefaultForPowders {
+            for other in allUnits where other.id != target.id { other.isDefaultForPowders = false }
+        }
+        if isDefaultForLiquids {
+            for other in allUnits where other.id != target.id { other.isDefaultForLiquids = false }
+        }
+
         try? context.save()
         dismiss()
     }

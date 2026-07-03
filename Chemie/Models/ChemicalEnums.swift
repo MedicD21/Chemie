@@ -24,6 +24,7 @@ enum PoolSurfaceType: String, Codable, CaseIterable, Identifiable, Sendable {
 /// metrics; those use a `custom-<uuid>` key instead of one of these raw values.
 enum StandardMetricKey: String, Codable, CaseIterable, Sendable {
     case freeChlorine = "free_chlorine"
+    case totalChlorine = "total_chlorine"
     case combinedChlorine = "combined_chlorine"
     case pH = "ph"
     case totalAlkalinity = "total_alkalinity"
@@ -37,6 +38,7 @@ enum StandardMetricKey: String, Codable, CaseIterable, Sendable {
     var displayName: String {
         switch self {
         case .freeChlorine: return "Free Chlorine"
+        case .totalChlorine: return "Total Chlorine"
         case .combinedChlorine: return "Combined Chlorine"
         case .pH: return "pH"
         case .totalAlkalinity: return "Total Alkalinity"
@@ -60,6 +62,7 @@ enum StandardMetricKey: String, Codable, CaseIterable, Sendable {
     var defaultIdealRange: ClosedRange<Double> {
         switch self {
         case .freeChlorine: return 2.0...4.0
+        case .totalChlorine: return 2.0...4.2
         case .combinedChlorine: return 0.0...0.2
         case .pH: return 7.4...7.6
         case .totalAlkalinity: return 80.0...120.0
@@ -74,7 +77,9 @@ enum StandardMetricKey: String, Codable, CaseIterable, Sendable {
 
     var sfSymbol: String {
         switch self {
-        case .freeChlorine, .combinedChlorine: return "drop.fill"
+        case .freeChlorine: return "drop.fill"
+        case .totalChlorine: return "drop.circle.fill"
+        case .combinedChlorine: return "drop.triangle.fill"
         case .pH: return "gauge.medium"
         case .totalAlkalinity: return "waveform.path.ecg"
         case .calciumHardness: return "cube.fill"
@@ -92,7 +97,7 @@ enum StandardMetricKey: String, Codable, CaseIterable, Sendable {
         switch self {
         case .freeChlorine, .pH, .totalAlkalinity, .calciumHardness, .cyanuricAcid, .salt, .combinedChlorine:
             return true
-        case .bromine, .phosphates, .totalDissolvedSolids:
+        case .totalChlorine, .bromine, .phosphates, .totalDissolvedSolids:
             return false
         }
     }

@@ -37,6 +37,17 @@ struct TestEntryView: View {
                             ForEach(pool.sortedEnabledMetrics) { metric in
                                 MetricInputRow(metric: metric, text: bindingFor(metric))
                             }
+                            if let combined = computedCombinedChlorine(for: pool) {
+                                HStack {
+                                    Label("Combined Chlorine (calculated)", systemImage: "drop.triangle.fill")
+                                        .font(Theme.Font.caption())
+                                        .foregroundStyle(Theme.textSecondary)
+                                    Spacer()
+                                    Text("\(formatted(combined)) ppm")
+                                        .font(Theme.Font.headline())
+                                        .foregroundStyle(Theme.accentAqua)
+                                }
+                            }
                         }
                         .listRowBackground(Theme.surface)
 
@@ -94,9 +105,27 @@ struct TestEntryView: View {
         }
     }
 
-    private func generatePlan(for pool: Pool) {
+    private func computedCombinedChlorine(for pool: Pool) -> Double? {
         let inputs = enteredValues(for: pool)
-        guard !inputs.isEmpty else { return }
+        guard
+            let total = inputs.first(where: { $0.metric.standardKey == .totalChlorine }),
+            let free = inputs.first(where: { $0.metric.standardKey == .freeChlorine })
+        else { return nil }
+        return ChlorineChemistry.combinedChlorine(totalChlorine: total.value, freeChlorine: free.value)
+    }
+
+    private func formatted(_ value: Double) -> String {
+        value == value.rounded() ? String(Int(value)) : String(format: "%.2f", value)
+    }
+
+    private func generatePlan(for pool: Pool) {
+        let rawInputs = enteredValues(for: pool)
+        guard !rawInputs.isEmpty else { return }
+
+        let resolvedInputs = TreatmentPlanGenerator.resolvingDerivedMetrics(
+            inputs: rawInputs,
+            allMetrics: pool.metrics ?? []
+        )
 
         let reading = TestReading()
         reading.pool = pool
@@ -108,7 +137,9 @@ struct TestEntryView: View {
         }
         context.insert(reading)
 
-        for input in inputs {
+        // Save a reading for everything actually typed in (including a raw Total
+        // Chlorine value, even though it never becomes its own treatment step).
+        for input in rawInputs {
             let metricReading = MetricReading(
                 metricKey: input.metric.key,
                 metricDisplayName: input.metric.displayName,
@@ -118,10 +149,25 @@ struct TestEntryView: View {
             metricReading.testReading = reading
             context.insert(metricReading)
         }
+
+        // When Free + Total were both entered, also save the derived Combined Chlorine
+        // value so history reflects what the treatment plan was actually based on.
+        let enteredBothFreeAndTotal = rawInputs.contains { $0.metric.standardKey == .totalChlorine }
+            && rawInputs.contains { $0.metric.standardKey == .freeChlorine }
+        if enteredBothFreeAndTotal, let derivedCombined = resolvedInputs.first(where: { $0.metric.standardKey == .combinedChlorine }) {
+            let metricReading = MetricReading(
+                metricKey: derivedCombined.metric.key,
+                metricDisplayName: derivedCombined.metric.displayName,
+                unitSymbol: derivedCombined.metric.unitSymbol,
+                value: derivedCombined.value
+            )
+            metricReading.testReading = reading
+            context.insert(metricReading)
+        }
         reading.readings = (reading.readings ?? [])
 
         let plan = TreatmentPlanGenerator.generate(
-            inputs: inputs,
+            inputs: resolvedInputs,
             poolGallons: pool.volumeGallons,
             inventory: allProducts,
             allUnits: allUnits,

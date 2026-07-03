@@ -105,6 +105,92 @@ final class TreatmentPlanGeneratorTests: XCTestCase {
         XCTAssertTrue(plan.steps.first?.instructions.contains("draining") ?? false)
     }
 
+    // MARK: - Total Chlorine -> Combined Chlorine derivation
+
+    func testResolvingDerivedMetricsComputesCombinedFromFreeAndTotal() throws {
+        let free = metric(.freeChlorine, min: 2, max: 4)
+        let total = metric(.totalChlorine, min: 2, max: 4.2)
+
+        let resolved = TreatmentPlanGenerator.resolvingDerivedMetrics(
+            inputs: [
+                MetricValueInput(metric: free, value: 3.0),
+                MetricValueInput(metric: total, value: 3.5),
+            ],
+            allMetrics: []
+        )
+
+        XCTAssertFalse(resolved.contains { $0.metric.standardKey == .totalChlorine })
+        let combined = try XCTUnwrap(resolved.first { $0.metric.standardKey == .combinedChlorine })
+        XCTAssertEqual(combined.value, 0.5, accuracy: 0.0001)
+    }
+
+    func testResolvingDerivedMetricsUsesPoolsCombinedChlorineMetricWhenAvailable() {
+        let free = metric(.freeChlorine, min: 2, max: 4)
+        let total = metric(.totalChlorine, min: 2, max: 4.2)
+        let poolCombined = metric(.combinedChlorine, min: 0, max: 0.3) // user customized the ideal max
+
+        let resolved = TreatmentPlanGenerator.resolvingDerivedMetrics(
+            inputs: [
+                MetricValueInput(metric: free, value: 3.0),
+                MetricValueInput(metric: total, value: 3.5),
+            ],
+            allMetrics: [poolCombined]
+        )
+
+        let combined = resolved.first { $0.metric.standardKey == .combinedChlorine }
+        XCTAssertEqual(combined?.metric.idealMax, 0.3)
+    }
+
+    func testResolvingDerivedMetricsOverridesManuallyEnteredCombined() throws {
+        let free = metric(.freeChlorine, min: 2, max: 4)
+        let total = metric(.totalChlorine, min: 2, max: 4.2)
+        let manualCombined = metric(.combinedChlorine, min: 0, max: 0.2)
+
+        let resolved = TreatmentPlanGenerator.resolvingDerivedMetrics(
+            inputs: [
+                MetricValueInput(metric: free, value: 3.0),
+                MetricValueInput(metric: total, value: 3.5),
+                MetricValueInput(metric: manualCombined, value: 0.9), // stale manual entry
+            ],
+            allMetrics: []
+        )
+
+        XCTAssertEqual(resolved.filter { $0.metric.standardKey == .combinedChlorine }.count, 1)
+        let combined = try XCTUnwrap(resolved.first { $0.metric.standardKey == .combinedChlorine })
+        XCTAssertEqual(combined.value, 0.5, accuracy: 0.0001)
+    }
+
+    func testResolvingDerivedMetricsPassesThroughManualCombinedWithoutTotal() {
+        let manualCombined = metric(.combinedChlorine, min: 0, max: 0.2)
+
+        let resolved = TreatmentPlanGenerator.resolvingDerivedMetrics(
+            inputs: [MetricValueInput(metric: manualCombined, value: 0.4)],
+            allMetrics: []
+        )
+
+        XCTAssertEqual(resolved.first { $0.metric.standardKey == .combinedChlorine }?.value, 0.4)
+    }
+
+    func testFullPlanGeneratedFromFreeAndTotalTriggersBreakpointChlorination() {
+        let free = metric(.freeChlorine, min: 2, max: 4)
+        let total = metric(.totalChlorine, min: 2, max: 4.2)
+
+        let rawInputs = [
+            MetricValueInput(metric: free, value: 3.0),
+            MetricValueInput(metric: total, value: 3.5), // combined = 0.5, above the 0.2 ideal max
+        ]
+        let resolved = TreatmentPlanGenerator.resolvingDerivedMetrics(inputs: rawInputs, allMetrics: [])
+
+        let plan = TreatmentPlanGenerator.generate(
+            inputs: resolved,
+            poolGallons: 10_000,
+            inventory: [],
+            allUnits: []
+        )
+
+        XCTAssertTrue(plan.steps.contains { $0.title.contains("Combined Chlorine") })
+    }
+
     private func weather(
         temp: Double = 75,
         uv: Int = 4,

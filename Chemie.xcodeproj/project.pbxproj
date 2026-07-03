@@ -28,6 +28,7 @@
 		441F486DE3D0DD74DC61F658 /* TreatmentPlanGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2F80DA2BE8239EB283543 /* TreatmentPlanGenerator.swift */; };
 		4598FB5C3E9491132F756AC9 /* InventoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761D53964503A6F61E4DCC39 /* InventoryEditView.swift */; };
 		4EB9EC35B52CCB388B23D20B /* MeasurementUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E74291DB7A7ACE905C4658 /* MeasurementUnit.swift */; };
+		56089479FECE28AB2E012DC9 /* ChlorineChemistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A7753C2A17273DD310B0B /* ChlorineChemistry.swift */; };
 		5ED9F01612FE3620BCBEAB04 /* MaintenanceTaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD756E8331A7A4B17FC734B /* MaintenanceTaskEditView.swift */; };
 		6457EA3A4A3187F7F29AE37B /* MetricEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BEFF484596B34B5AB2673A /* MetricEditorView.swift */; };
 		6CBD1C3C0D5D962C18CF8E5D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61306C9C5C2A79D945BA9377 /* NotificationManager.swift */; };
@@ -44,6 +45,7 @@
 		8CE5B6C603D813254D6D20A9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E996F7A4EF88A83A89F0CB /* Theme.swift */; };
 		95066A8905BD199D8E593CE0 /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A762A8447CAC242796841A /* UnitConverter.swift */; };
 		991BB9112F3F8E7E8AA87195 /* UnitConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E0314AC715634BE108FED1 /* UnitConverterTests.swift */; };
+		9CA5DD3017242D8E3586DD24 /* ChlorineChemistryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811238E47127358E7BF83D6B /* ChlorineChemistryTests.swift */; };
 		9DE8CB02A3901D7C9B4A2BFF /* WeatherContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A529223BC13183AC17D9E /* WeatherContextTests.swift */; };
 		A096DF62D23AA73C45332B63 /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127750E14C1ABA75362E418B /* StatusBadge.swift */; };
 		A1CFBE2D68B29CA851F9297D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F85EDA1458EA6A8ED25B7C53 /* Assets.xcassets */; };
@@ -51,6 +53,7 @@
 		A7401667A77BC7E37CC41905 /* ChemicalProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87093A94AD0BE348B42AA81D /* ChemicalProduct.swift */; };
 		A7843B163AC57D073F513B59 /* WeatherContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7DB6B7D8FF8C60D6B0F29C /* WeatherContext.swift */; };
 		B265921CFEBFDDCAE5BC1E15 /* TreatmentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C95609799775C96619131 /* TreatmentStep.swift */; };
+		BD7E5A131B3323B7B31CF1ED /* TrendAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F131DCFB2EA661F815E9DC0 /* TrendAnalyzer.swift */; };
 		BE2D88304B436A1270163703 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA663B4501126F076EA92D /* PersistenceController.swift */; };
 		C2DBDD15F8F508D4C0AD45E7 /* ChemistryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A1F71AFAD8F3107CD2096 /* ChemistryConstants.swift */; };
 		C8DBDEBBA911C3E879A05297 /* TestHistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E376472A7765D5D26EF69B3 /* TestHistoryDetailView.swift */; };
@@ -61,6 +64,7 @@
 		E342BC5B47C6DC96C2BED698 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8539B3E5745619EF02A01A /* SettingsView.swift */; };
 		E35FD09C65B8FCAC6C357531 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B2EA09B1B1A30F3DC1729 /* SectionHeader.swift */; };
 		E61DF632AC070AFC055E00E9 /* WeatherKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FE117342701BA0927BE435 /* WeatherKitService.swift */; };
+		EA529920192A7D2E898BC16E /* TrendAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EBC75A4D81C52CB8ACD9C /* TrendAnalyzerTests.swift */; };
 		F0A00DB965B4493B1C53C67D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644C57925B1F64A5742F609 /* HistoryView.swift */; };
 		F3A2E84A48C314C9E91263BB /* TreatmentPlanGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB859057563EAAA7B8748 /* TreatmentPlanGeneratorTests.swift */; };
 		FC6B3B76974E29574D00D24F /* WeatherBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562723478924EE0D2EC6A502 /* WeatherBanner.swift */; };
@@ -79,6 +83,7 @@
 /* Begin PBXFileReference section */
 		070B5D5D37E880692E45767A /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		08FCB859057563EAAA7B8748 /* TreatmentPlanGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentPlanGeneratorTests.swift; sourceTree = "<group>"; };
+		0F131DCFB2EA661F815E9DC0 /* TrendAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendAnalyzer.swift; sourceTree = "<group>"; };
 		0FC3BE27F96A87AEBF19B439 /* MaintenanceTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceTaskTests.swift; sourceTree = "<group>"; };
 		127750E14C1ABA75362E418B /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
 		1751EA29577107BEAF43CCEF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -105,13 +110,16 @@
 		761D53964503A6F61E4DCC39 /* InventoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryEditView.swift; sourceTree = "<group>"; };
 		7B8A1F71AFAD8F3107CD2096 /* ChemistryConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryConstants.swift; sourceTree = "<group>"; };
 		7C8D1DDAE5129655F333434F /* WeatherStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStore.swift; sourceTree = "<group>"; };
+		811238E47127358E7BF83D6B /* ChlorineChemistryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChlorineChemistryTests.swift; sourceTree = "<group>"; };
 		812E5D2DA9EDEDF2FB6B4434 /* MetricInputRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricInputRow.swift; sourceTree = "<group>"; };
 		82BEFF484596B34B5AB2673A /* MetricEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricEditorView.swift; sourceTree = "<group>"; };
 		8444C234AED4E83EB477DEF9 /* MaintenanceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceListView.swift; sourceTree = "<group>"; };
 		8644C57925B1F64A5742F609 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		87093A94AD0BE348B42AA81D /* ChemicalProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalProduct.swift; sourceTree = "<group>"; };
 		8AA42C46550B077AE47D8D39 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		8D9EBC75A4D81C52CB8ACD9C /* TrendAnalyzerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendAnalyzerTests.swift; sourceTree = "<group>"; };
 		8EEDC855A8F5146344F95E10 /* ChemicalTestMetricTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalTestMetricTests.swift; sourceTree = "<group>"; };
+		968A7753C2A17273DD310B0B /* ChlorineChemistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChlorineChemistry.swift; sourceTree = "<group>"; };
 		96A3D361E65790130E772EEF /* InventoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryMonitor.swift; sourceTree = "<group>"; };
 		9A8F2A878A65CE78CDF401BC /* MaintenanceTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceTask.swift; sourceTree = "<group>"; };
 		A3E74291DB7A7ACE905C4658 /* MeasurementUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnit.swift; sourceTree = "<group>"; };
@@ -176,10 +184,12 @@
 			isa = PBXGroup;
 			children = (
 				8EEDC855A8F5146344F95E10 /* ChemicalTestMetricTests.swift */,
+				811238E47127358E7BF83D6B /* ChlorineChemistryTests.swift */,
 				2F3A099834406234D1F4895D /* DosageCalculatorTests.swift */,
 				0FC3BE27F96A87AEBF19B439 /* MaintenanceTaskTests.swift */,
 				A7F95ACFC0DDD0B75CF73E7D /* PersistenceTests.swift */,
 				08FCB859057563EAAA7B8748 /* TreatmentPlanGeneratorTests.swift */,
+				8D9EBC75A4D81C52CB8ACD9C /* TrendAnalyzerTests.swift */,
 				C3E0314AC715634BE108FED1 /* UnitConverterTests.swift */,
 				C28A529223BC13183AC17D9E /* WeatherContextTests.swift */,
 			);
@@ -314,8 +324,10 @@
 			children = (
 				D7B26F22397A677D24EC0758 /* ChemicalCompatibilityRules.swift */,
 				7B8A1F71AFAD8F3107CD2096 /* ChemistryConstants.swift */,
+				968A7753C2A17273DD310B0B /* ChlorineChemistry.swift */,
 				E57BBA32261A8B26C601F927 /* DosageCalculator.swift */,
 				4EC2F80DA2BE8239EB283543 /* TreatmentPlanGenerator.swift */,
+				0F131DCFB2EA661F815E9DC0 /* TrendAnalyzer.swift */,
 				C9A762A8447CAC242796841A /* UnitConverter.swift */,
 				DA7DB6B7D8FF8C60D6B0F29C /* WeatherContext.swift */,
 			);
@@ -468,10 +480,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				14CF5DCF33E34C5B9BC2C6DD /* ChemicalTestMetricTests.swift in Sources */,
+				9CA5DD3017242D8E3586DD24 /* ChlorineChemistryTests.swift in Sources */,
 				15702289886A44F4036F9A9A /* DosageCalculatorTests.swift in Sources */,
 				0C4609D254AC7ADFC5830246 /* MaintenanceTaskTests.swift in Sources */,
 				1AAC8A622A99746BA43A7CC2 /* PersistenceTests.swift in Sources */,
 				F3A2E84A48C314C9E91263BB /* TreatmentPlanGeneratorTests.swift in Sources */,
+				EA529920192A7D2E898BC16E /* TrendAnalyzerTests.swift in Sources */,
 				991BB9112F3F8E7E8AA87195 /* UnitConverterTests.swift in Sources */,
 				9DE8CB02A3901D7C9B4A2BFF /* WeatherContextTests.swift in Sources */,
 			);
@@ -487,6 +501,7 @@
 				702BFFCF532A5546EE29D48B /* ChemicalTestMetric.swift in Sources */,
 				DC517BB3A9511A35E97586E0 /* ChemieApp.swift in Sources */,
 				C2DBDD15F8F508D4C0AD45E7 /* ChemistryConstants.swift in Sources */,
+				56089479FECE28AB2E012DC9 /* ChlorineChemistry.swift in Sources */,
 				1DCEDBB17BD63A8C98004459 /* DashboardView.swift in Sources */,
 				83F510171B2E283CFB4F6B8B /* DefaultDataSeeder.swift in Sources */,
 				371A1F856EE32FA38728A6C2 /* DosageCalculator.swift in Sources */,
@@ -520,6 +535,7 @@
 				005E9800F8D61807E51780BD /* TreatmentPlanView.swift in Sources */,
 				B265921CFEBFDDCAE5BC1E15 /* TreatmentStep.swift in Sources */,
 				6CF5624BA9D08877F178E427 /* TreatmentStepRow.swift in Sources */,
+				BD7E5A131B3323B7B31CF1ED /* TrendAnalyzer.swift in Sources */,
 				7DF9D7A8E6D9E3C79FFA55D8 /* TrendChartView.swift in Sources */,
 				95066A8905BD199D8E593CE0 /* UnitConverter.swift in Sources */,
 				0B617E73E4F22D4CE0FDA870 /* UnitEditorView.swift in Sources */,

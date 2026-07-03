@@ -35,6 +35,34 @@ struct GeneratedPlan: Sendable {
 }
 
 enum TreatmentPlanGenerator {
+    /// Expands raw user-entered inputs: if both Free and Total Chlorine were entered,
+    /// derives Combined Chlorine (Total - Free) and swaps it in, dropping the raw Total
+    /// Chlorine value (which never becomes its own treatment step) and any manually
+    /// entered Combined Chlorine for the same test. `allMetrics` supplies the pool's
+    /// Combined Chlorine metric definition (ideal range, display name) even when that
+    /// metric isn't independently enabled for manual entry.
+    static func resolvingDerivedMetrics(
+        inputs: [MetricValueInput],
+        allMetrics: [ChemicalTestMetric]
+    ) -> [MetricValueInput] {
+        guard
+            let totalInput = inputs.first(where: { $0.metric.standardKey == .totalChlorine }),
+            let freeInput = inputs.first(where: { $0.metric.standardKey == .freeChlorine })
+        else {
+            return inputs.filter { $0.metric.standardKey != .totalChlorine }
+        }
+
+        let combinedValue = ChlorineChemistry.combinedChlorine(totalChlorine: totalInput.value, freeChlorine: freeInput.value)
+        let combinedMetric = allMetrics.first { $0.standardKey == .combinedChlorine }
+            ?? ChlorineChemistry.fallbackCombinedChlorineMetric()
+
+        var resolved = inputs.filter {
+            $0.metric.standardKey != .totalChlorine && $0.metric.standardKey != .combinedChlorine
+        }
+        resolved.append(MetricValueInput(metric: combinedMetric, value: combinedValue))
+        return resolved
+    }
+
     /// Builds an ordered, sequenced treatment plan from a set of freshly-entered test
     /// values, checking the user's on-hand inventory first before falling back to
     /// general chemical guidance, and attaching safety/timing warnings.

@@ -13,12 +13,6 @@ struct DosageRecommendation: Sendable, Identifiable {
 }
 
 enum DosageCalculator {
-    /// The default set of fallback units offered when no specific product/preferred unit
-    /// is available, used to express amounts as oz/lb.
-    static func genericFallbackUnits(from allUnits: [MeasurementUnit]) -> [MeasurementUnit] {
-        allUnits.filter { ["oz", "lb"].contains($0.abbreviation) }
-    }
-
     /// Computes a ranked list of dosage recommendations for correcting `metric` from
     /// `currentValue` toward `targetValue`, preferring chemicals already on hand.
     static func recommendations(
@@ -44,8 +38,6 @@ enum DosageCalculator {
         guard delta > 0 else { return [] }
         delta *= deltaMultiplier
 
-        let fallbackUnits = genericFallbackUnits(from: allUnits)
-
         // Rank guidelines so that any chemical already in the user's active inventory comes first,
         // preserving the original preference order otherwise.
         let ranked = guidelines.enumerated().sorted { lhs, rhs in
@@ -61,14 +53,16 @@ enum DosageCalculator {
                 .filter { $0.isActive && $0.chemicalKind == guideline.chemicalKind }
                 .sorted { $0.quantityOnHand > $1.quantityOnHand }
                 .first
+            let formType = matchedProduct?.formType ?? guideline.chemicalKind.defaultFormType
             let display = UnitConverter.displayAmount(
                 forOunces: ounces,
+                formType: formType,
                 preferredUnit: matchedProduct?.dosingUnit,
-                fallbackUnits: fallbackUnits
+                allUnits: allUnits
             )
             return DosageRecommendation(
                 chemicalKind: guideline.chemicalKind,
-                formType: matchedProduct?.formType ?? guideline.chemicalKind.defaultFormType,
+                formType: formType,
                 displayAmount: display,
                 matchedProductID: matchedProduct?.id,
                 matchedProductName: matchedProduct?.name,

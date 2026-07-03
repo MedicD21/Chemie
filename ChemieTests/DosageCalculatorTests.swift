@@ -124,6 +124,41 @@ final class DosageCalculatorTests: XCTestCase {
         XCTAssertTrue(recs.isEmpty)
     }
 
+    // MARK: - Regression: with the real seeded default units, a powder/granular chemical
+    // that isn't in inventory yet should be suggested in the user's default "Scoops" unit,
+    // not pounds.
+
+    func testTotalAlkalinityWithNoInventoryUsesSeededScoopsDefault() throws {
+        let recs = DosageCalculator.recommendations(
+            for: .totalAlkalinity,
+            direction: .increase,
+            currentValue: 70,
+            targetValue: 100,
+            poolGallons: 10_000,
+            inventory: [],
+            allUnits: MeasurementUnit.makeDefaults()
+        )
+
+        let first = try XCTUnwrap(recs.first)
+        XCTAssertEqual(first.chemicalKind, .sodiumBicarbonate)
+        XCTAssertEqual(first.displayAmount.unitAbbreviation, "scoop")
+    }
+
+    func testLiquidChlorineWithNoInventoryStillUsesOuncesNotScoops() throws {
+        let recs = DosageCalculator.recommendations(
+            for: .freeChlorine,
+            direction: .increase,
+            currentValue: 1,
+            targetValue: 2,
+            poolGallons: 10_000,
+            inventory: [],
+            allUnits: MeasurementUnit.makeDefaults()
+        )
+
+        let first = try XCTUnwrap(recs.first)
+        XCTAssertEqual(first.displayAmount.unitAbbreviation, "oz")
+    }
+
     func testPoolVolumeScalesDosageLinearly() {
         // Keep both results in ounces (under the 16oz lb-switchover) so the comparison is apples-to-apples.
         let small = DosageCalculator.recommendations(

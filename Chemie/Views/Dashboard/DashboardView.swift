@@ -34,8 +34,15 @@ struct DashboardView: View {
                         }
 
                         if let plan = activePlans.first {
-                            ActivePlanCard(plan: plan) {
-                                selectedTab = .test
+                            NavigationLink(value: plan) {
+                                ActivePlanCard(plan: plan)
+                            }
+                            .buttonStyle(.plain)
+                        }
+
+                        if !upcomingTrendWarnings(for: pool).isEmpty {
+                            TrendAlertCard(predictions: upcomingTrendWarnings(for: pool)) {
+                                selectedTab = .history
                             }
                         }
 
@@ -66,6 +73,31 @@ struct DashboardView: View {
             }
             .screenBackground()
             .navigationTitle("Chemie")
+            .navigationDestination(for: TreatmentPlan.self) { plan in
+                TreatmentPlanView(plan: plan)
+            }
+        }
+    }
+
+    /// Metrics whose recent trend projects them leaving their ideal range within a few
+    /// days — an early warning surfaced before the next test would otherwise catch it.
+    private func upcomingTrendWarnings(for pool: Pool) -> [(metricName: String, prediction: TrendPrediction)] {
+        let readings = pool.testReadings ?? []
+        guard readings.count >= 2 else { return [] }
+        let warningWindow = Calendar.current.date(byAdding: .day, value: 3, to: .now) ?? .now
+
+        return pool.sortedEnabledMetrics.compactMap { metric in
+            let points = TrendAnalyzer.points(forMetricKey: metric.key, in: readings)
+            guard let prediction = TrendAnalyzer.analyze(
+                points: points,
+                idealMin: metric.idealMin,
+                idealMax: metric.idealMax,
+                metricName: metric.displayName,
+                unitSymbol: metric.unitSymbol
+            ), let projectedDate = prediction.projectedOutOfRangeDate, projectedDate <= warningWindow else {
+                return nil
+            }
+            return (metric.displayName, prediction)
         }
     }
 }
@@ -98,31 +130,52 @@ private struct PoolHeaderCard: View {
 
 private struct ActivePlanCard: View {
     let plan: TreatmentPlan
-    let onTap: () -> Void
 
     private var completedCount: Int {
         plan.orderedSteps.filter(\.isCompleted).count
     }
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            SectionHeader(title: "Active Treatment Plan", systemImage: "list.bullet.clipboard.fill")
+            ProgressView(value: Double(completedCount), total: Double(max(plan.orderedSteps.count, 1)))
+                .tint(Theme.accentAqua)
+            Text("\(completedCount) of \(plan.orderedSteps.count) steps complete")
+                .font(Theme.Font.caption())
+                .foregroundStyle(Theme.textSecondary)
+            if let next = plan.nextIncompleteStep {
+                Text("Next: \(next.title)")
+                    .font(Theme.Font.body().weight(.semibold))
+                    .foregroundStyle(Theme.textPrimary)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cardStyle()
+    }
+}
+
+private struct TrendAlertCard: View {
+    let predictions: [(metricName: String, prediction: TrendPrediction)]
+    let onTap: () -> Void
+
+    var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 10) {
-                SectionHeader(title: "Active Treatment Plan", systemImage: "list.bullet.clipboard.fill")
-                ProgressView(value: Double(completedCount), total: Double(max(plan.orderedSteps.count, 1)))
-                    .tint(Theme.accentAqua)
-                Text("\(completedCount) of \(plan.orderedSteps.count) steps complete")
-                    .font(Theme.Font.caption())
-                    .foregroundStyle(Theme.textSecondary)
-                if let next = plan.nextIncompleteStep {
-                    Text("Next: \(next.title)")
-                        .font(Theme.Font.body().weight(.semibold))
-                        .foregroundStyle(Theme.textPrimary)
+            VStack(alignment: .leading, spacing: 8) {
+                SectionHeader(title: "Trending Toward Out of Range", systemImage: "chart.line.uptrend.xyaxis")
+                ForEach(predictions, id: \.metricName) { item in
+                    Text(item.prediction.message)
+                        .font(Theme.Font.body())
+                        .foregroundStyle(Theme.textSecondary)
                 }
             }
         }
         .buttonStyle(.plain)
         .frame(maxWidth: .infinity, alignment: .leading)
         .cardStyle()
+        .overlay(
+            RoundedRectangle(cornerRadius: Theme.Metrics.cornerRadius, style: .continuous)
+                .stroke(Theme.warning.opacity(0.5), lineWidth: 1)
+        )
     }
 }
 

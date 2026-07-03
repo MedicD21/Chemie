@@ -17,14 +17,20 @@ struct TrendChartView: View {
         return availableMetrics.first
     }
 
-    private var points: [(date: Date, value: Double)] {
+    private var points: [TrendPoint] {
         guard let activeMetric else { return [] }
-        return readings
-            .sorted { $0.date < $1.date }
-            .compactMap { reading in
-                guard let match = reading.readings?.first(where: { $0.metricKey == activeMetric.key }) else { return nil }
-                return (reading.date, match.value)
-            }
+        return TrendAnalyzer.points(forMetricKey: activeMetric.key, in: readings)
+    }
+
+    private var prediction: TrendPrediction? {
+        guard let activeMetric else { return nil }
+        return TrendAnalyzer.analyze(
+            points: points,
+            idealMin: activeMetric.idealMin,
+            idealMax: activeMetric.idealMax,
+            metricName: activeMetric.displayName,
+            unitSymbol: activeMetric.unitSymbol
+        )
     }
 
     var body: some View {
@@ -72,8 +78,28 @@ struct TrendChartView: View {
                         AxisValueLabel().foregroundStyle(Theme.textSecondary)
                     }
                 }
+
+                if let prediction {
+                    Label(prediction.message, systemImage: iconName(for: prediction.direction))
+                        .font(Theme.Font.caption())
+                        .foregroundStyle(color(for: prediction))
+                        .padding(.top, 2)
+                }
             }
         }
         .padding(.vertical, 6)
+    }
+
+    private func iconName(for direction: TrendDirection) -> String {
+        switch direction {
+        case .rising: return "arrow.up.right"
+        case .falling: return "arrow.down.right"
+        case .stable: return "arrow.right"
+        }
+    }
+
+    private func color(for prediction: TrendPrediction) -> Color {
+        guard prediction.projectedOutOfRangeDate != nil else { return Theme.textSecondary }
+        return Theme.warning
     }
 }
