@@ -1,0 +1,710 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		005E9800F8D61807E51780BD /* TreatmentPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55B0FCDE1F777B1E8153E82 /* TreatmentPlanView.swift */; };
+		0B617E73E4F22D4CE0FDA870 /* UnitEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B50BC2B9CD67D9F71B8777 /* UnitEditorView.swift */; };
+		14CF5DCF33E34C5B9BC2C6DD /* ChemicalTestMetricTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEDC855A8F5146344F95E10 /* ChemicalTestMetricTests.swift */; };
+		15702289886A44F4036F9A9A /* DosageCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A099834406234D1F4895D /* DosageCalculatorTests.swift */; };
+		1AAC8A622A99746BA43A7CC2 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F95ACFC0DDD0B75CF73E7D /* PersistenceTests.swift */; };
+		1DCEDBB17BD63A8C98004459 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0F8F8E1567B6A8DE97E33 /* DashboardView.swift */; };
+		2377EC8CAAD69FC736DD0E9A /* PoolProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F44B5C5BA191BFFA9DBF9C9 /* PoolProfileView.swift */; };
+		23D2C14789E9F3C2BF810BB3 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2C8AC26713F9BB7F64D787 /* NotificationSettingsView.swift */; };
+		2F3AD598DCD6BB48D8702AC4 /* ChemicalCompatibilityRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B26F22397A677D24EC0758 /* ChemicalCompatibilityRules.swift */; };
+		3654C48724CA54FFB146C18A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA42C46550B077AE47D8D39 /* RootView.swift */; };
+		371A1F856EE32FA38728A6C2 /* DosageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57BBA32261A8B26C601F927 /* DosageCalculator.swift */; };
+		37D49AA4C025DE85F1F7AB08 /* TestEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BD52BFEFA2CBAB9B672AE /* TestEntryView.swift */; };
+		441E0D1D5914A90302E46789 /* TreatmentPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C57FE886BEF9B1D81EFFC /* TreatmentPlan.swift */; };
+		441F486DE3D0DD74DC61F658 /* TreatmentPlanGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC2F80DA2BE8239EB283543 /* TreatmentPlanGenerator.swift */; };
+		4598FB5C3E9491132F756AC9 /* InventoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761D53964503A6F61E4DCC39 /* InventoryEditView.swift */; };
+		4EB9EC35B52CCB388B23D20B /* MeasurementUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E74291DB7A7ACE905C4658 /* MeasurementUnit.swift */; };
+		6457EA3A4A3187F7F29AE37B /* MetricEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BEFF484596B34B5AB2673A /* MetricEditorView.swift */; };
+		6CBD1C3C0D5D962C18CF8E5D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61306C9C5C2A79D945BA9377 /* NotificationManager.swift */; };
+		6CF5624BA9D08877F178E427 /* TreatmentStepRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7094D1A72C7F5C6C3585598 /* TreatmentStepRow.swift */; };
+		702BFFCF532A5546EE29D48B /* ChemicalTestMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC9B00E55C11E6A56AC9B4A /* ChemicalTestMetric.swift */; };
+		7054BAF61757CE597936CE74 /* MetricInputRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812E5D2DA9EDEDF2FB6B4434 /* MetricInputRow.swift */; };
+		7C03D276F740540197FC3F20 /* TestReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B804EB90A1171FC81089A08C /* TestReading.swift */; };
+		7DF9D7A8E6D9E3C79FFA55D8 /* TrendChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FA75D43FE706EF2C64A21 /* TrendChartView.swift */; };
+		803B14921521F557B8F35003 /* ChemicalEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611FE1B706708C4261FA1CA0 /* ChemicalEnums.swift */; };
+		83F510171B2E283CFB4F6B8B /* DefaultDataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B83B0FD331B64B9C2A740 /* DefaultDataSeeder.swift */; };
+		85E9539673105E9FFD842A4D /* InventoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B48BFF391B7BB61E2D28A5 /* InventoryListView.swift */; };
+		8CE5B6C603D813254D6D20A9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E996F7A4EF88A83A89F0CB /* Theme.swift */; };
+		95066A8905BD199D8E593CE0 /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A762A8447CAC242796841A /* UnitConverter.swift */; };
+		991BB9112F3F8E7E8AA87195 /* UnitConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E0314AC715634BE108FED1 /* UnitConverterTests.swift */; };
+		A096DF62D23AA73C45332B63 /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127750E14C1ABA75362E418B /* StatusBadge.swift */; };
+		A1CFBE2D68B29CA851F9297D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F85EDA1458EA6A8ED25B7C53 /* Assets.xcassets */; };
+		A6E4E5A39A5190F9EAB37D70 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070B5D5D37E880692E45767A /* ViewModifiers.swift */; };
+		A7401667A77BC7E37CC41905 /* ChemicalProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87093A94AD0BE348B42AA81D /* ChemicalProduct.swift */; };
+		B265921CFEBFDDCAE5BC1E15 /* TreatmentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C95609799775C96619131 /* TreatmentStep.swift */; };
+		BE2D88304B436A1270163703 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA663B4501126F076EA92D /* PersistenceController.swift */; };
+		C2DBDD15F8F508D4C0AD45E7 /* ChemistryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A1F71AFAD8F3107CD2096 /* ChemistryConstants.swift */; };
+		C8DBDEBBA911C3E879A05297 /* TestHistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E376472A7765D5D26EF69B3 /* TestHistoryDetailView.swift */; };
+		DC517BB3A9511A35E97586E0 /* ChemieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4E866540A7365FD38A706 /* ChemieApp.swift */; };
+		DEB1D165B4C538E54A8CF8EC /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA9ABE86BC7EBE79DD3106 /* Pool.swift */; };
+		DEF479E1E050830877646246 /* InventoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3D361E65790130E772EEF /* InventoryMonitor.swift */; };
+		E342BC5B47C6DC96C2BED698 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8539B3E5745619EF02A01A /* SettingsView.swift */; };
+		E35FD09C65B8FCAC6C357531 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17B2EA09B1B1A30F3DC1729 /* SectionHeader.swift */; };
+		F0A00DB965B4493B1C53C67D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8644C57925B1F64A5742F609 /* HistoryView.swift */; };
+		F3A2E84A48C314C9E91263BB /* TreatmentPlanGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCB859057563EAAA7B8748 /* TreatmentPlanGeneratorTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA90B9FB82EEB5E21A16B1B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6306F59176B76EE86E320AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCB3D5961D98D33FEDCEACDC;
+			remoteInfo = Chemie;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		070B5D5D37E880692E45767A /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		08FCB859057563EAAA7B8748 /* TreatmentPlanGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentPlanGeneratorTests.swift; sourceTree = "<group>"; };
+		127750E14C1ABA75362E418B /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
+		1CB0F8F8E1567B6A8DE97E33 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		1F44B5C5BA191BFFA9DBF9C9 /* PoolProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolProfileView.swift; sourceTree = "<group>"; };
+		2806B4EB2C4CE37149C98A77 /* Chemie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chemie.entitlements; sourceTree = "<group>"; };
+		2CC9B00E55C11E6A56AC9B4A /* ChemicalTestMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalTestMetric.swift; sourceTree = "<group>"; };
+		2F3A099834406234D1F4895D /* DosageCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageCalculatorTests.swift; sourceTree = "<group>"; };
+		3D9FA75D43FE706EF2C64A21 /* TrendChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendChartView.swift; sourceTree = "<group>"; };
+		45C3E4BEC3693595C915E6B2 /* ChemieTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChemieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E376472A7765D5D26EF69B3 /* TestHistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHistoryDetailView.swift; sourceTree = "<group>"; };
+		4EC2F80DA2BE8239EB283543 /* TreatmentPlanGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentPlanGenerator.swift; sourceTree = "<group>"; };
+		4FEA663B4501126F076EA92D /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		55784170443D13EA1AF4898F /* Chemie.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Chemie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		611FE1B706708C4261FA1CA0 /* ChemicalEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalEnums.swift; sourceTree = "<group>"; };
+		61306C9C5C2A79D945BA9377 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		6D0AF6CD773201FF5CF8C157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		700C95609799775C96619131 /* TreatmentStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentStep.swift; sourceTree = "<group>"; };
+		71E996F7A4EF88A83A89F0CB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		72B48BFF391B7BB61E2D28A5 /* InventoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryListView.swift; sourceTree = "<group>"; };
+		761D53964503A6F61E4DCC39 /* InventoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryEditView.swift; sourceTree = "<group>"; };
+		7B8A1F71AFAD8F3107CD2096 /* ChemistryConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryConstants.swift; sourceTree = "<group>"; };
+		812E5D2DA9EDEDF2FB6B4434 /* MetricInputRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricInputRow.swift; sourceTree = "<group>"; };
+		82BEFF484596B34B5AB2673A /* MetricEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricEditorView.swift; sourceTree = "<group>"; };
+		8644C57925B1F64A5742F609 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		87093A94AD0BE348B42AA81D /* ChemicalProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalProduct.swift; sourceTree = "<group>"; };
+		8AA42C46550B077AE47D8D39 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		8EEDC855A8F5146344F95E10 /* ChemicalTestMetricTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalTestMetricTests.swift; sourceTree = "<group>"; };
+		96A3D361E65790130E772EEF /* InventoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryMonitor.swift; sourceTree = "<group>"; };
+		A3E74291DB7A7ACE905C4658 /* MeasurementUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnit.swift; sourceTree = "<group>"; };
+		A7F95ACFC0DDD0B75CF73E7D /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
+		A9C4E866540A7365FD38A706 /* ChemieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemieApp.swift; sourceTree = "<group>"; };
+		B17B2EA09B1B1A30F3DC1729 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		B49C57FE886BEF9B1D81EFFC /* TreatmentPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentPlan.swift; sourceTree = "<group>"; };
+		B804EB90A1171FC81089A08C /* TestReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestReading.swift; sourceTree = "<group>"; };
+		C3E0314AC715634BE108FED1 /* UnitConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterTests.swift; sourceTree = "<group>"; };
+		C5B50BC2B9CD67D9F71B8777 /* UnitEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitEditorView.swift; sourceTree = "<group>"; };
+		C9A762A8447CAC242796841A /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
+		CFDA9ABE86BC7EBE79DD3106 /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
+		D7B26F22397A677D24EC0758 /* ChemicalCompatibilityRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalCompatibilityRules.swift; sourceTree = "<group>"; };
+		DB8539B3E5745619EF02A01A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DE7B83B0FD331B64B9C2A740 /* DefaultDataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataSeeder.swift; sourceTree = "<group>"; };
+		E55B0FCDE1F777B1E8153E82 /* TreatmentPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentPlanView.swift; sourceTree = "<group>"; };
+		E57BBA32261A8B26C601F927 /* DosageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosageCalculator.swift; sourceTree = "<group>"; };
+		E7094D1A72C7F5C6C3585598 /* TreatmentStepRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreatmentStepRow.swift; sourceTree = "<group>"; };
+		E70BD52BFEFA2CBAB9B672AE /* TestEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEntryView.swift; sourceTree = "<group>"; };
+		EC2C8AC26713F9BB7F64D787 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
+		F85EDA1458EA6A8ED25B7C53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		46235C0634BC064FEC85A81E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F85EDA1458EA6A8ED25B7C53 /* Assets.xcassets */,
+				2806B4EB2C4CE37149C98A77 /* Chemie.entitlements */,
+				6D0AF6CD773201FF5CF8C157 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		464D233C9583BFB32DBAFA51 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				71E996F7A4EF88A83A89F0CB /* Theme.swift */,
+				070B5D5D37E880692E45767A /* ViewModifiers.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		64F93DDE8D9B54AFA3D2056B /* ChemieTests */ = {
+			isa = PBXGroup;
+			children = (
+				8EEDC855A8F5146344F95E10 /* ChemicalTestMetricTests.swift */,
+				2F3A099834406234D1F4895D /* DosageCalculatorTests.swift */,
+				A7F95ACFC0DDD0B75CF73E7D /* PersistenceTests.swift */,
+				08FCB859057563EAAA7B8748 /* TreatmentPlanGeneratorTests.swift */,
+				C3E0314AC715634BE108FED1 /* UnitConverterTests.swift */,
+			);
+			path = ChemieTests;
+			sourceTree = "<group>";
+		};
+		7BF8B28CFEC4ACA68FBF96A4 /* Chemie */ = {
+			isa = PBXGroup;
+			children = (
+				DA4CBB28164CF2B1B3FACE2B /* App */,
+				EF4BBAF10091BF8E3BE1A8F5 /* ChemistryEngine */,
+				F623D09E46ED4E8F94A8E2DE /* Models */,
+				46235C0634BC064FEC85A81E /* Resources */,
+				FDF5E627472502F1B7287D0D /* Services */,
+				464D233C9583BFB32DBAFA51 /* Theme */,
+				845F944647EC11B844130265 /* Views */,
+			);
+			path = Chemie;
+			sourceTree = "<group>";
+		};
+		845F944647EC11B844130265 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F8F0A821A008F806FDC64F6 /* Components */,
+				E4AB928D6740F7274B3A1E18 /* Dashboard */,
+				B19DCE5E4A2B5432A9786F98 /* History */,
+				F32C736945497C90594976D7 /* Inventory */,
+				B0E8EF6D9BF90647283D618C /* Settings */,
+				95C8CB34FB76C621FD83C68B /* Testing */,
+				DAC6C04B4BCCCBD07BA84566 /* TreatmentPlan */,
+				8AA42C46550B077AE47D8D39 /* RootView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8F8F0A821A008F806FDC64F6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B17B2EA09B1B1A30F3DC1729 /* SectionHeader.swift */,
+				127750E14C1ABA75362E418B /* StatusBadge.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		95C8CB34FB76C621FD83C68B /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				82BEFF484596B34B5AB2673A /* MetricEditorView.swift */,
+				812E5D2DA9EDEDF2FB6B4434 /* MetricInputRow.swift */,
+				E70BD52BFEFA2CBAB9B672AE /* TestEntryView.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		B0E8EF6D9BF90647283D618C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EC2C8AC26713F9BB7F64D787 /* NotificationSettingsView.swift */,
+				1F44B5C5BA191BFFA9DBF9C9 /* PoolProfileView.swift */,
+				DB8539B3E5745619EF02A01A /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B19DCE5E4A2B5432A9786F98 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				8644C57925B1F64A5742F609 /* HistoryView.swift */,
+				4E376472A7765D5D26EF69B3 /* TestHistoryDetailView.swift */,
+				3D9FA75D43FE706EF2C64A21 /* TrendChartView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		C1615695E7CB6BA85290E079 = {
+			isa = PBXGroup;
+			children = (
+				7BF8B28CFEC4ACA68FBF96A4 /* Chemie */,
+				64F93DDE8D9B54AFA3D2056B /* ChemieTests */,
+				F0ECAB05133F972AA71B08C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA4CBB28164CF2B1B3FACE2B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A9C4E866540A7365FD38A706 /* ChemieApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DAC6C04B4BCCCBD07BA84566 /* TreatmentPlan */ = {
+			isa = PBXGroup;
+			children = (
+				E55B0FCDE1F777B1E8153E82 /* TreatmentPlanView.swift */,
+				E7094D1A72C7F5C6C3585598 /* TreatmentStepRow.swift */,
+			);
+			path = TreatmentPlan;
+			sourceTree = "<group>";
+		};
+		E4AB928D6740F7274B3A1E18 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				1CB0F8F8E1567B6A8DE97E33 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		EF4BBAF10091BF8E3BE1A8F5 /* ChemistryEngine */ = {
+			isa = PBXGroup;
+			children = (
+				D7B26F22397A677D24EC0758 /* ChemicalCompatibilityRules.swift */,
+				7B8A1F71AFAD8F3107CD2096 /* ChemistryConstants.swift */,
+				E57BBA32261A8B26C601F927 /* DosageCalculator.swift */,
+				4EC2F80DA2BE8239EB283543 /* TreatmentPlanGenerator.swift */,
+				C9A762A8447CAC242796841A /* UnitConverter.swift */,
+			);
+			path = ChemistryEngine;
+			sourceTree = "<group>";
+		};
+		F0ECAB05133F972AA71B08C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55784170443D13EA1AF4898F /* Chemie.app */,
+				45C3E4BEC3693595C915E6B2 /* ChemieTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F32C736945497C90594976D7 /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				761D53964503A6F61E4DCC39 /* InventoryEditView.swift */,
+				72B48BFF391B7BB61E2D28A5 /* InventoryListView.swift */,
+				C5B50BC2B9CD67D9F71B8777 /* UnitEditorView.swift */,
+			);
+			path = Inventory;
+			sourceTree = "<group>";
+		};
+		F623D09E46ED4E8F94A8E2DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				611FE1B706708C4261FA1CA0 /* ChemicalEnums.swift */,
+				87093A94AD0BE348B42AA81D /* ChemicalProduct.swift */,
+				2CC9B00E55C11E6A56AC9B4A /* ChemicalTestMetric.swift */,
+				A3E74291DB7A7ACE905C4658 /* MeasurementUnit.swift */,
+				CFDA9ABE86BC7EBE79DD3106 /* Pool.swift */,
+				B804EB90A1171FC81089A08C /* TestReading.swift */,
+				B49C57FE886BEF9B1D81EFFC /* TreatmentPlan.swift */,
+				700C95609799775C96619131 /* TreatmentStep.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FDF5E627472502F1B7287D0D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DE7B83B0FD331B64B9C2A740 /* DefaultDataSeeder.swift */,
+				96A3D361E65790130E772EEF /* InventoryMonitor.swift */,
+				61306C9C5C2A79D945BA9377 /* NotificationManager.swift */,
+				4FEA663B4501126F076EA92D /* PersistenceController.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		977F2FB63AD2A6068C1A3077 /* ChemieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D72BAAF43BE8206D038B882 /* Build configuration list for PBXNativeTarget "ChemieTests" */;
+			buildPhases = (
+				40C7724C6D30B3989DBE9489 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D78EF0E30496A92634619A59 /* PBXTargetDependency */,
+			);
+			name = ChemieTests;
+			packageProductDependencies = (
+			);
+			productName = ChemieTests;
+			productReference = 45C3E4BEC3693595C915E6B2 /* ChemieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CCB3D5961D98D33FEDCEACDC /* Chemie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3038284D17FE02F5FEB56B2 /* Build configuration list for PBXNativeTarget "Chemie" */;
+			buildPhases = (
+				F6150BCCF7B71DA7F945383B /* Sources */,
+				CEDC89FDCECDEAFC9D3E8F8F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chemie;
+			packageProductDependencies = (
+			);
+			productName = Chemie;
+			productReference = 55784170443D13EA1AF4898F /* Chemie.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B6306F59176B76EE86E320AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					977F2FB63AD2A6068C1A3077 = {
+						DevelopmentTeam = 286LKF859M;
+						ProvisioningStyle = Automatic;
+					};
+					CCB3D5961D98D33FEDCEACDC = {
+						DevelopmentTeam = 286LKF859M;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A45A5FC248879560C9D5441E /* Build configuration list for PBXProject "Chemie" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C1615695E7CB6BA85290E079;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F0ECAB05133F972AA71B08C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CCB3D5961D98D33FEDCEACDC /* Chemie */,
+				977F2FB63AD2A6068C1A3077 /* ChemieTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEDC89FDCECDEAFC9D3E8F8F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1CFBE2D68B29CA851F9297D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		40C7724C6D30B3989DBE9489 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14CF5DCF33E34C5B9BC2C6DD /* ChemicalTestMetricTests.swift in Sources */,
+				15702289886A44F4036F9A9A /* DosageCalculatorTests.swift in Sources */,
+				1AAC8A622A99746BA43A7CC2 /* PersistenceTests.swift in Sources */,
+				F3A2E84A48C314C9E91263BB /* TreatmentPlanGeneratorTests.swift in Sources */,
+				991BB9112F3F8E7E8AA87195 /* UnitConverterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6150BCCF7B71DA7F945383B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F3AD598DCD6BB48D8702AC4 /* ChemicalCompatibilityRules.swift in Sources */,
+				803B14921521F557B8F35003 /* ChemicalEnums.swift in Sources */,
+				A7401667A77BC7E37CC41905 /* ChemicalProduct.swift in Sources */,
+				702BFFCF532A5546EE29D48B /* ChemicalTestMetric.swift in Sources */,
+				DC517BB3A9511A35E97586E0 /* ChemieApp.swift in Sources */,
+				C2DBDD15F8F508D4C0AD45E7 /* ChemistryConstants.swift in Sources */,
+				1DCEDBB17BD63A8C98004459 /* DashboardView.swift in Sources */,
+				83F510171B2E283CFB4F6B8B /* DefaultDataSeeder.swift in Sources */,
+				371A1F856EE32FA38728A6C2 /* DosageCalculator.swift in Sources */,
+				F0A00DB965B4493B1C53C67D /* HistoryView.swift in Sources */,
+				4598FB5C3E9491132F756AC9 /* InventoryEditView.swift in Sources */,
+				85E9539673105E9FFD842A4D /* InventoryListView.swift in Sources */,
+				DEF479E1E050830877646246 /* InventoryMonitor.swift in Sources */,
+				4EB9EC35B52CCB388B23D20B /* MeasurementUnit.swift in Sources */,
+				6457EA3A4A3187F7F29AE37B /* MetricEditorView.swift in Sources */,
+				7054BAF61757CE597936CE74 /* MetricInputRow.swift in Sources */,
+				6CBD1C3C0D5D962C18CF8E5D /* NotificationManager.swift in Sources */,
+				23D2C14789E9F3C2BF810BB3 /* NotificationSettingsView.swift in Sources */,
+				BE2D88304B436A1270163703 /* PersistenceController.swift in Sources */,
+				DEB1D165B4C538E54A8CF8EC /* Pool.swift in Sources */,
+				2377EC8CAAD69FC736DD0E9A /* PoolProfileView.swift in Sources */,
+				3654C48724CA54FFB146C18A /* RootView.swift in Sources */,
+				E35FD09C65B8FCAC6C357531 /* SectionHeader.swift in Sources */,
+				E342BC5B47C6DC96C2BED698 /* SettingsView.swift in Sources */,
+				A096DF62D23AA73C45332B63 /* StatusBadge.swift in Sources */,
+				37D49AA4C025DE85F1F7AB08 /* TestEntryView.swift in Sources */,
+				C8DBDEBBA911C3E879A05297 /* TestHistoryDetailView.swift in Sources */,
+				7C03D276F740540197FC3F20 /* TestReading.swift in Sources */,
+				8CE5B6C603D813254D6D20A9 /* Theme.swift in Sources */,
+				441E0D1D5914A90302E46789 /* TreatmentPlan.swift in Sources */,
+				441F486DE3D0DD74DC61F658 /* TreatmentPlanGenerator.swift in Sources */,
+				005E9800F8D61807E51780BD /* TreatmentPlanView.swift in Sources */,
+				B265921CFEBFDDCAE5BC1E15 /* TreatmentStep.swift in Sources */,
+				6CF5624BA9D08877F178E427 /* TreatmentStepRow.swift in Sources */,
+				7DF9D7A8E6D9E3C79FFA55D8 /* TrendChartView.swift in Sources */,
+				95066A8905BD199D8E593CE0 /* UnitConverter.swift in Sources */,
+				0B617E73E4F22D4CE0FDA870 /* UnitEditorView.swift in Sources */,
+				A6E4E5A39A5190F9EAB37D70 /* ViewModifiers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D78EF0E30496A92634619A59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCB3D5961D98D33FEDCEACDC /* Chemie */;
+			targetProxy = FA90B9FB82EEB5E21A16B1B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		540008C92CAB6F4580F01278 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dushin.Chemie.Tests;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chemie.app/Chemie";
+			};
+			name = Debug;
+		};
+		66AB57FA77777E2DE00AD291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 286LKF859M;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C15BD9F6F0A8EB5E12AE0C71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dushin.Chemie.Tests;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chemie.app/Chemie";
+			};
+			name = Release;
+		};
+		D7389D7BCFEA7827F14F890D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Chemie/Resources/Chemie.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Chemie/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dushin.Chemie;
+				PRODUCT_NAME = Chemie;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3C0677A86B218E89F66D021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 286LKF859M;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FB91A1BC2DAA2217D1685F3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Chemie/Resources/Chemie.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Chemie/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dushin.Chemie;
+				PRODUCT_NAME = Chemie;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D72BAAF43BE8206D038B882 /* Build configuration list for PBXNativeTarget "ChemieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				540008C92CAB6F4580F01278 /* Debug */,
+				C15BD9F6F0A8EB5E12AE0C71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A3038284D17FE02F5FEB56B2 /* Build configuration list for PBXNativeTarget "Chemie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7389D7BCFEA7827F14F890D /* Debug */,
+				FB91A1BC2DAA2217D1685F3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A45A5FC248879560C9D5441E /* Build configuration list for PBXProject "Chemie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66AB57FA77777E2DE00AD291 /* Debug */,
+				F3C0677A86B218E89F66D021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B6306F59176B76EE86E320AF /* Project object */;
+}
